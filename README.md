@@ -42,5 +42,5 @@ ansible-playbook playbook.yml
 
 
 ### Credits
-- PiHole Ansible Role[r_pufky.pihole](https://github.com/r-pufky/ansible_pihole)
+- [@r-pufky](https://github.com/r-pufky) for PiHole Ansible Role[r_pufky.pihole](https://github.com/r-pufky/ansible_pihole)
 - PiHole WebUI fix on Linux Deploy [here](https://www.reddit.com/r/pihole/comments/nswh1r/successfully_installed_pihole_on_spare_android/)
