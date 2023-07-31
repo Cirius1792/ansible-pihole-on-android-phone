@@ -1,0 +1,49 @@
+---
+# tasks file for pihole-linux-deploy
+#
+- name: Add groups to root
+  become: true
+  user:
+    name: root
+    groups:
+      - aid_net_bt_admin
+      - aid_net_bt
+      - aid_inet
+      - aid_net_raw
+      - aid_net_admin
+    append: yes
+  register: set_permissions_root
+  when: is_linux_deploy_env
+
+- name: Add groups to pihole
+  become: true
+  user:
+    name: pihole
+    groups:
+      - aid_net_bt_admin
+      - aid_net_bt
+      - aid_inet 
+      - aid_net_raw 
+      - aid_net_admin
+    append: yes
+  register: set_permissions_pihole
+  when: is_linux_deploy_env
+
+- name: Add groups to www-data
+  become: true
+  user:
+    name: www-data
+    groups:
+      - aid_net_bt_admin
+      - aid_net_bt
+      - aid_inet
+      - aid_net_raw
+      - aid_net_admin
+    append: yes
+  register: set_permissions_www_data
+  when: is_linux_deploy_env
+
+- name: Reboot Android Device
+  become: true
+  ansible.builtin.shell: unchroot am start -a android.intent.action.REBOOT
+  when: set_permissions_root.changed or set_permissions_pihole.changed or set_permissions_www_data.changed

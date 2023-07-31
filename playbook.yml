@@ -1,0 +1,18 @@
+---
+- import_playbook: install_python.yml
+- import_playbook: install_pihole.yml
+- hosts: android-pihole
+  become: true
+ 
+  tasks:
+    - name: Update Software
+      become: true
+      apt:
+        upgrade: yes
+        update_cache: yes
+        cache_valid_time: 86400 
+
+  roles:
+    - pihole-linux-deploy
+
+

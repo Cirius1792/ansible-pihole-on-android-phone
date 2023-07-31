@@ -1,0 +1,13 @@
+---
+- name: Install python  with ansible
+  hosts: android-pihole
+  become: true
+  gather_facts: false
+  pre_tasks:
+  - name: Check For Python 3
+    raw: 'python3 --version'
+    register: python_check
+    changed_when: false 
+  - name: Install Python 3
+    raw: 'apt install python3'
+    when: "'not found' in python_check.stdout"

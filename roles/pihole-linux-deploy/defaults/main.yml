@@ -1,0 +1,3 @@
+---
+# defaults file for pihole-linux-deploy
+is_linux_deploy_env:  false

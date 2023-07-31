@@ -1,0 +1,9 @@
+---
+- hosts: android-pihole
+  become: true
+  vars_files:
+    - host_vars/android-pihole/vars/pihole.yml
+    - host_vars/android-pihole/vars/secrets.yml
+ 
+  roles:
+    - r_pufky.pihole
