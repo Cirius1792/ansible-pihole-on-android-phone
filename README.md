@@ -28,16 +28,41 @@ ansible-galaxy install r_pufky.pihole
 
 Create a variable file with the pihole password you want to set: 
 ```
-host_vars/android-pihole/vars/secrets.yml
+touch host_vars/android-pihole/vars/secrets.yml
+ansible-vault edit host_vars/android-pihole/vars/secrets.yml
+```
+The secrets.yml should contain:
+```yaml
+---
+pihole_webpassword: <my_password_here>
 ```
 Set the additional variables that you need in: 
 ```
 host_vars/android-pihole/vars/pihole.yml
 ```
+For Example: 
+```yaml
+pihole_local_backup: host_vars/android-pihole/pihole-backup-teleporter.tar.gz
+
+pihole_webpassword: 'CLTmi5'
+
+pihole_webtheme:           'default-light'
+pihole_pihole_interface:   'wlan0'
+pihole_pihole_dns_1:       '8.8.8.8'
+pihole_pihole_dns_2:       '8.8.4.4'
+
+pihole_query_logging:         'false'
+pihole_install_web_server:    'true'
+pihole_install_web_interface: 'true'
+pihole_lighttpd_enabled:      'true'
+pihole_cache_size:            '10000'
+
+
+```
 And run the playbook:
 
 ```
-ansible-playbook playbook.yml
+ansible-playbook playbook.yml --ask-vault-password
 ```
 
 
